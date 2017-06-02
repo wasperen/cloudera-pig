@@ -1,0 +1,14 @@
+FROM base-cdh-#CDH_VER#
+
+ENV PIG_VER #PIG_VER#
+
+RUN cd /tmp \
+    && svn co http://svn.apache.org/repos/asf/pig/branches/branch-$PIG_VER/ \
+    && cd branch-$PIG_VER \
+    && ant -Dhadoopversion=23
+
+RUN mv /tmp/branch-$PIG_VER /opt/pig-$PIG_VER
+
+VOLUME /opt/pig-${PIG_VER}
+
+ENTRYPOINT /bin/bash

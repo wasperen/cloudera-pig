@@ -1,0 +1,13 @@
+FROM centos:7
+
+RUN yum -y update
+
+ENV CDH_VER #CDH_VER#
+
+COPY cloudera-cdh-${CDH_VER}.repo /etc/yum.repos.d
+
+RUN yum -y install \
+      java-1.8.0-openjdk \
+      ant \
+      subversion \
+      hadoop
